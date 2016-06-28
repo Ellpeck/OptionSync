@@ -127,51 +127,51 @@ public class GuiConfigureOptions extends GuiScreen{
         }
         else if(button == this.buttonSave){
             if(this.saveName != null && !this.saveName.isEmpty()){
-                this.mc.gameSettings.saveOptions();
-
-                File folder = OptionSync.getOptionsDir();
-                File currentOptions = new File(this.mc.mcDataDir, "options.txt");
-                File newOptions = new File(folder, this.saveName+OptionSync.OPTION_SAVE_FORMAT);
-
                 try{
+                    this.mc.gameSettings.saveOptions();
+
+                    File folder = OptionSync.getOptionsDir();
+                    File currentOptions = new File(this.mc.mcDataDir, "options.txt");
+                    File newOptions = new File(folder, this.saveName+OptionSync.OPTION_SAVE_FORMAT);
+
                     Files.copy(currentOptions, newOptions);
+
+                    this.saveNameField.setText("");
+                    this.calcSaveName();
+
+                    this.options.initList();
                 }
                 catch(IOException e){
                     OptionSync.LOGGER.error("Could not save current options!", e);
                 }
-
-                this.saveNameField.setText("");
-                this.calcSaveName();
-
-                this.options.initList();
             }
         }
         else if(button == this.buttonLoad){
             GuiListOptionsEntry entry = this.options.getCurrSelected();
             if(entry != null){
-                File currentOptions = new File(this.mc.mcDataDir, "options.txt");
-                File newOptions = entry.file;
-
                 try{
+                    File currentOptions = new File(this.mc.mcDataDir, "options.txt");
+                    File newOptions = entry.file;
+
                     Files.copy(newOptions, currentOptions);
+
+                    this.mc.gameSettings.loadOptions();
+
+                    //Fix language because this game is hideous
+                    if(this.mc.gameSettings.language != null){
+                        LanguageManager manager = this.mc.getLanguageManager();
+                        for(Language lang : manager.getLanguages()){
+                            if(this.mc.gameSettings.language.equals(lang.getLanguageCode())){
+                                manager.setCurrentLanguage(lang);
+                            }
+                        }
+                    }
+
+                    this.mc.refreshResources();
                 }
                 catch(IOException e){
                     OptionSync.LOGGER.error("Could not load options!", e);
                 }
-
-                this.mc.gameSettings.loadOptions();
-
-                //Fix language because this game is hideous
-                if(this.mc.gameSettings.language != null){
-                    LanguageManager manager = this.mc.getLanguageManager();
-                    for(Language lang : manager.getLanguages()){
-                        if(this.mc.gameSettings.language.equals(lang.getLanguageCode())){
-                            manager.setCurrentLanguage(lang);
-                        }
-                    }
-                }
-
-                this.mc.refreshResources();
             }
         }
         else if(button == this.buttonDelete){
