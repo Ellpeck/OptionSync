@@ -14,12 +14,12 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'idea'
 
-version = "1.10-r1"
+version = "1.9.4-r1"
 group = "de.ellpeck.optionsync"
 archivesBaseName = "OptionSync"
 
 minecraft {
-    version = "1.10-12.18.0.1983-1.10.0"
+    version = "1.9.4-12.17.0.1987"
     runDir = "idea"
 
     mappings = "snapshot_20160519"

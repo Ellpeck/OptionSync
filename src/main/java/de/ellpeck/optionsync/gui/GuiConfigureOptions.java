@@ -6,6 +6,8 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.resources.Language;
+import net.minecraft.client.resources.LanguageManager;
 import net.minecraft.util.ChatAllowedCharacters;
 
 import java.io.File;
@@ -158,6 +160,18 @@ public class GuiConfigureOptions extends GuiScreen{
                 }
 
                 this.mc.gameSettings.loadOptions();
+
+                //Fix language because this game is hideous
+                if(this.mc.gameSettings.language != null){
+                    LanguageManager manager = this.mc.getLanguageManager();
+                    for(Language lang : manager.getLanguages()){
+                        if(this.mc.gameSettings.language.equals(lang.getLanguageCode())){
+                            manager.setCurrentLanguage(lang);
+                        }
+                    }
+                }
+
+                this.mc.refreshResources();
             }
         }
         else if(button == this.buttonDelete){
