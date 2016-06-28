@@ -3,13 +3,9 @@ package de.ellpeck.optionsync;
 import de.ellpeck.optionsync.gui.GuiConfigureOptions;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptions;
-import net.minecraft.client.resources.I18n;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
 public class EventHandling{
 
     //Yes, this is my birthday. I really did that.

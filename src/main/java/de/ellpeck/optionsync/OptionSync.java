@@ -19,17 +19,6 @@ public class OptionSync{
 
     public static final String OPTION_SAVE_FORMAT = ".txt";
 
-    @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event){
-        if(event.getSide() != Side.CLIENT){
-            String message = NAME+" is a client-side only mod! It is not supposed to be installed on a server!";
-            LOGGER.fatal(message);
-            throw new RuntimeException(message);
-        }
-
-        MinecraftForge.EVENT_BUS.register(new EventHandling());
-    }
-
     public static File getOptionsDir(){
         String folder = System.getProperty("user.home");
         String os = System.getProperty("os.name");
@@ -49,5 +38,16 @@ public class OptionSync{
             dir.mkdirs();
         }
         return dir;
+    }
+
+    @Mod.EventHandler
+    public void preInit(FMLPreInitializationEvent event){
+        if(event.getSide() != Side.CLIENT){
+            String message = NAME+" is a client-side only mod! It is not supposed to be installed on a server!";
+            LOGGER.fatal(message);
+            throw new RuntimeException(message);
+        }
+
+        MinecraftForge.EVENT_BUS.register(new EventHandling());
     }
 }

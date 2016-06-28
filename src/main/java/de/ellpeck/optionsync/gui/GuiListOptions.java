@@ -21,6 +21,11 @@ public class GuiListOptions extends GuiListExtended{
         this.initList();
     }
 
+    public static File[] getAllFiles(){
+        File folder = OptionSync.getOptionsDir();
+        return folder.listFiles();
+    }
+
     public void setCurrSelected(GuiListOptionsEntry entry){
         if(entry != null){
             this.currSelected = this.options.indexOf(entry);
@@ -51,11 +56,6 @@ public class GuiListOptions extends GuiListExtended{
                 }
             }
         }
-    }
-
-    public static File[] getAllFiles(){
-        File folder = OptionSync.getOptionsDir();
-        return folder.listFiles();
     }
 
     @Override

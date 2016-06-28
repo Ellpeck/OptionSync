@@ -7,9 +7,9 @@ import java.io.File;
 
 public class GuiListOptionsEntry implements GuiListExtended.IGuiListEntry{
 
+    public final File file;
     private final Minecraft mc;
     private final GuiListOptions list;
-    public final File file;
 
     public GuiListOptionsEntry(GuiListOptions list, File file){
         this.list = list;

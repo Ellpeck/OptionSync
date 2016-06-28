@@ -33,6 +33,10 @@ public class GuiConfigureOptions extends GuiScreen{
         this.guiBefore = guiBefore;
     }
 
+    public static String getNameWithoutFormat(File file){
+        return file.getName().replaceAll(OptionSync.OPTION_SAVE_FORMAT, "");
+    }
+
     @Override
     public void initGui(){
         super.initGui();
@@ -114,10 +118,6 @@ public class GuiConfigureOptions extends GuiScreen{
         else{
             super.keyTyped(typedChar, keyCode);
         }
-    }
-
-    public static String getNameWithoutFormat(File file){
-        return file.getName().replaceAll(OptionSync.OPTION_SAVE_FORMAT, "");
     }
 
     @Override
