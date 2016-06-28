@@ -42,12 +42,8 @@ public class OptionSync{
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event){
-        if(event.getSide() != Side.CLIENT){
-            String message = NAME+" is a client-side only mod! It is not supposed to be installed on a server!";
-            LOGGER.fatal(message);
-            throw new RuntimeException(message);
+        if(event.getSide() == Side.CLIENT){
+            MinecraftForge.EVENT_BUS.register(new EventHandling());
         }
-
-        MinecraftForge.EVENT_BUS.register(new EventHandling());
     }
 }
