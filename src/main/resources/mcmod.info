@@ -1,0 +1,19 @@
+[
+{
+  "modid": "optionsync",
+  "name": "OptionSync",
+  "description": "A Mod about syncing your options between Minecraft instances",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "http://github.com/Ellpeck/OptionSync",
+  "updateUrl": "",
+  "authorList": [ "Ellpeck" ],
+  "credits": "Author: Ellpeck",
+  "logoFile": "assets/optionsync/textures/logo.png",
+  "screenshots": [
+  ],
+  "parent":"",
+  "dependencies": [
+  ]
+}
+]

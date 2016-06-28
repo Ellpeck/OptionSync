@@ -58,6 +58,7 @@ public class GuiConfigureOptions extends GuiScreen{
         this.buttonLoad = new GuiButton(3, this.width-loadWidth-10-deleteWidth, this.height-50, loadWidth, 20, strg);
         this.buttonList.add(this.buttonLoad);
 
+        this.updateButtonStates();
     }
 
     @Override
@@ -65,6 +66,10 @@ public class GuiConfigureOptions extends GuiScreen{
         super.updateScreen();
         this.saveNameField.updateCursorCounter();
 
+        this.updateButtonStates();
+    }
+
+    private void updateButtonStates(){
         this.buttonSave.enabled = this.saveName != null && !this.saveName.isEmpty();
 
         boolean selected = this.options.getCurrSelected() != null;
