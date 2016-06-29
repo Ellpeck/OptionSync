@@ -2,7 +2,6 @@ package de.ellpeck.optionsync.gui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiListExtended;
-import net.minecraft.client.renderer.Tessellator;
 
 import java.io.File;
 
@@ -19,8 +18,13 @@ public class GuiListOptionsEntry implements GuiListExtended.IGuiListEntry{
     }
 
     @Override
-    public void drawEntry(int slotIndex, int x, int y, int listWidth, int slotHeight, Tessellator tessy, int mouseX, int mouseY, boolean isSelected){
-        this.mc.fontRenderer.drawString(GuiConfigureOptions.getNameWithoutFormat(this.file), x+5, y+5, 16777215);
+    public void setSelected(int par1, int par2, int par3){
+
+    }
+
+    @Override
+    public void drawEntry(int slotIndex, int x, int y, int listWidth, int slotHeight, int mouseX, int mouseY, boolean isSelected){
+        this.mc.fontRendererObj.drawString(GuiConfigureOptions.getNameWithoutFormat(this.file), x+5, y+5, 16777215);
     }
 
     @Override

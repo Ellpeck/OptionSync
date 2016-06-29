@@ -1,10 +1,10 @@
 package de.ellpeck.optionsync;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import de.ellpeck.optionsync.gui.GuiConfigureOptions;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptions;
 import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class EventHandling{
 
@@ -15,7 +15,7 @@ public class EventHandling{
     public void onGuiOpened(GuiScreenEvent.InitGuiEvent event){
         if(event.gui instanceof GuiOptions){
             String strg = OptionSync.NAME;
-            event.buttonList.add(new GuiButton(BUTTON_ID, 5, event.gui.height-25, event.gui.mc.fontRenderer.getStringWidth(strg)+15, 20, strg));
+            event.buttonList.add(new GuiButton(BUTTON_ID, 5, event.gui.height-25, event.gui.mc.fontRendererObj.getStringWidth(strg)+15, 20, strg));
         }
     }
 
