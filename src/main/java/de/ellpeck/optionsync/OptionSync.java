@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 
+//clientSideOnly missing in 1.7.10, might want to do something about that somehow?
 @Mod(modid = OptionSync.MOD_ID, name = OptionSync.NAME, version = OptionSync.VERSION)
 public class OptionSync{
 
