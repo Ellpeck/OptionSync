@@ -5,6 +5,7 @@ import de.ellpeck.optionsync.OptionSync;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.resources.Language;
 import net.minecraft.client.resources.LanguageManager;
@@ -116,7 +117,9 @@ public class GuiConfigureOptions extends GuiScreen{
             this.calcSaveName();
         }
         else{
-            super.keyTyped(typedChar, keyCode);
+            if(keyCode == 1){
+                this.mc.displayGuiScreen(this.guiBefore);
+            }
         }
     }
 
@@ -166,6 +169,10 @@ public class GuiConfigureOptions extends GuiScreen{
                             }
                         }
                     }
+
+                    //Reload Gui for scale etc
+                    ScaledResolution res = new ScaledResolution(this.mc);
+                    this.setWorldAndResolution(this.mc, res.getScaledWidth(), res.getScaledHeight());
 
                     this.mc.refreshResources();
                 }
