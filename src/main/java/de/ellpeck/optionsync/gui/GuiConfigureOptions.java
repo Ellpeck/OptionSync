@@ -86,7 +86,8 @@ public class GuiConfigureOptions extends GuiScreen{
     private void calcSaveName(){
         this.saveName = this.saveNameField.getText().trim();
         this.saveName = this.saveName.replaceAll("[\\./\"]", "_");
-        for(char c : ChatAllowedCharacters.ILLEGAL_FILE_CHARACTERS){
+        //This is actually supposed to be called disallowed, which it is in 1.9 and higher
+        for(char c : ChatAllowedCharacters.allowedCharactersArray){
             this.saveName = this.saveName.replace(c, '_');
         }
         for(String s : DISALLOWED_FILENAMES){

@@ -13,16 +13,16 @@ public class EventHandling{
 
     @SubscribeEvent
     public void onGuiOpened(GuiScreenEvent.InitGuiEvent event){
-        if(event.getGui() instanceof GuiOptions){
+        if(event.gui instanceof GuiOptions){
             String strg = OptionSync.NAME;
-            event.getButtonList().add(new GuiButton(BUTTON_ID, 5, event.getGui().height-25, event.getGui().mc.fontRendererObj.getStringWidth(strg)+15, 20, strg));
+            event.buttonList.add(new GuiButton(BUTTON_ID, 5, event.gui.height-25, event.gui.mc.fontRendererObj.getStringWidth(strg)+15, 20, strg));
         }
     }
 
     @SubscribeEvent
     public void onGuiClicked(GuiScreenEvent.ActionPerformedEvent event){
-        if(event.getGui() instanceof GuiOptions && event.getButton() != null && event.getButton().id == BUTTON_ID){
-            event.getGui().mc.displayGuiScreen(new GuiConfigureOptions(event.getGui()));
+        if(event.gui instanceof GuiOptions && event.button != null && event.button.id == BUTTON_ID){
+            event.gui.mc.displayGuiScreen(new GuiConfigureOptions(event.gui));
         }
     }
 
