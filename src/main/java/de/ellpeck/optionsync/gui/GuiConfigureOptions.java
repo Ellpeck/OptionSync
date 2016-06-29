@@ -46,7 +46,7 @@ public class GuiConfigureOptions extends GuiScreen{
         this.buttonBack = new GuiButton(0, 5, this.height-25, this.fontRendererObj.getStringWidth(strg)+15, 20, strg);
         this.buttonList.add(this.buttonBack);
 
-        this.saveNameField = new GuiTextField(1, this.fontRendererObj, this.width-205, this.height-25, 200, 20);
+        this.saveNameField = new GuiTextField(this.fontRendererObj, this.width-205, this.height-25, 200, 20);
         this.saveNameField.setMaxStringLength(20);
 
         strg = I18n.format(OptionSync.MOD_ID+".save");
@@ -87,7 +87,8 @@ public class GuiConfigureOptions extends GuiScreen{
         this.saveName = this.saveNameField.getText().trim();
         this.saveName = this.saveName.replaceAll("[\\./\"]", "_");
         //This is actually supposed to be called disallowed, which it is in 1.9 and higher
-        for(char c : ChatAllowedCharacters.allowedCharactersArray){
+        //Why was this renamed TWICE during 1.7.10->1.9!?
+        for(char c : ChatAllowedCharacters.allowedCharacters){
             this.saveName = this.saveName.replace(c, '_');
         }
         for(String s : DISALLOWED_FILENAMES){
@@ -112,7 +113,7 @@ public class GuiConfigureOptions extends GuiScreen{
     }
 
     @Override
-    protected void keyTyped(char typedChar, int keyCode) throws IOException{
+    protected void keyTyped(char typedChar, int keyCode){
         if(this.saveNameField.textboxKeyTyped(typedChar, keyCode)){
             this.calcSaveName();
         }
@@ -122,7 +123,7 @@ public class GuiConfigureOptions extends GuiScreen{
     }
 
     @Override
-    protected void actionPerformed(GuiButton button) throws IOException{
+    protected void actionPerformed(GuiButton button){
         if(button == this.buttonBack){
             this.mc.displayGuiScreen(this.guiBefore);
         }
@@ -161,9 +162,12 @@ public class GuiConfigureOptions extends GuiScreen{
                     //Fix language because this game is hideous
                     if(this.mc.gameSettings.language != null){
                         LanguageManager manager = this.mc.getLanguageManager();
-                        for(Language lang : manager.getLanguages()){
-                            if(this.mc.gameSettings.language.equals(lang.getLanguageCode())){
-                                manager.setCurrentLanguage(lang);
+                        for(Object o : manager.getLanguages()){
+                            if(o instanceof Language){
+                                Language lang = (Language)o;
+                                if(this.mc.gameSettings.language.equals(lang.getLanguageCode())){
+                                    manager.setCurrentLanguage(lang);
+                                }
                             }
                         }
                     }
@@ -191,9 +195,11 @@ public class GuiConfigureOptions extends GuiScreen{
     }
 
     @Override
-    public void handleMouseInput() throws IOException{
-        super.handleMouseInput();
-        this.options.handleMouseInput();
+    protected void mouseMovedOrUp(int x, int y, int mouseEvent){
+        //I have no idea what this is, I just copied it from some Gui somewhere
+        if(mouseEvent != 0 || !this.options.func_148181_b(x, y, mouseEvent)){
+            super.mouseMovedOrUp(x, y, mouseEvent);
+        }
     }
 
     @Override
@@ -207,19 +213,13 @@ public class GuiConfigureOptions extends GuiScreen{
     }
 
     @Override
-    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException{
+    protected void mouseClicked(int mouseX, int mouseY, int mouseButton){
         super.mouseClicked(mouseX, mouseY, mouseButton);
         this.saveNameField.mouseClicked(mouseX, mouseY, mouseButton);
-        this.options.mouseClicked(mouseX, mouseY, mouseButton);
+        this.options.func_148179_a(mouseX, mouseY, mouseButton);
 
         if(this.saveNameField.isFocused()){
             this.options.setCurrSelected(null);
         }
-    }
-
-    @Override
-    protected void mouseReleased(int mouseX, int mouseY, int state){
-        super.mouseReleased(mouseX, mouseY, state);
-        this.options.mouseReleased(mouseX, mouseY, state);
     }
 }
